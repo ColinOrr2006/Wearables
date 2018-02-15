@@ -1,30 +1,39 @@
-# to understand the strcture of the source files and the general steps required to process the source data
+# to understand the structure of the source files and the general steps required to process the source data
 # see the CodeBook.md and README.md for the details
+#
+#
+#
 # set working directory on local machine. Needs to be updated if 
 setwd("C:\\colin\\Coursera\\Course 3\\UCI HAR Dataset")
 
 library (dplyr) 
 
+# LOADING source data into data frames
+#
 # Load subject identifiers for both test and training datasets
 testSubjects <- read.table("test\\subject_test.txt")
 trainSubjects <- read.table("train\\subject_train.txt")
-
-# set column name to "subject" for the subject identifiers list (a single column table)
-colnames(testSubjects) <- "subject"
-colnames(trainSubjects) <- "subject"
 
 # load activity identifiers for both test and training datasets 
 testActivity <- read.table("test\\y_test.txt")
 trainActivity <- read.table("train\\y_train.txt")
 
-# set column name to "activity" for the activity identifiers list for both data sources 
-colnames(testActivity) <- "activity"
-colnames(trainActivity) <- "activity"
-
 # load source data for both test and training groups
 testData <- read.table("test\\X_test.txt")
 trainData <- read.table("train\\X_train.txt")
 
+
+# ADD column names to some source files
+# set column name to "subject" for the subject identifiers list (a single column table)
+colnames(testSubjects) <- "subject"
+colnames(trainSubjects) <- "subject"
+
+# set column name to "activity" for the activity identifiers list for both data sources 
+colnames(testActivity) <- "activity"
+colnames(trainActivity) <- "activity"
+
+
+# LOADING metadata
 # load the "text label" data for the different activity codes and set column names to "activity" and "activityLabel"
 activityLabels <- read.table("activity_labels.txt")
 colnames(activityLabels) <- c("activity","activityLabel")
@@ -34,6 +43,7 @@ colnames(activityLabels) <- c("activity","activityLabel")
 features <- read.table("features.txt")
 colnames(features) <- c("featureID","feature")
 
+# TIDYING the data
 # join the subject identifiers with the activity indentifiers into a single file for test and single file for training
 testmeta <- cbind(testSubjects, testActivity)
 trainmeta <- cbind(trainSubjects, trainActivity)
@@ -65,6 +75,8 @@ write.table (MeanStdDF, "tidyData.txt", sep=",", row.names = FALSE, col.names = 
 # create a new dataframe of the mean and STD data grouped by subject and activity
 grpDF <- group_by(MeanStdDF,activityLabel, subject)
 
-#get a mean of all the source data grouped by the variables listed above
+#get a mean of all the source data grouped by the variables listed above and output to text file
 S_grp_df <- summarize_all(grpDF, .funs = mean)
+write.table (S_grp_df, "MeanData.txt", sep=",", row.names = FALSE, col.names = TRUE)
+
 # 

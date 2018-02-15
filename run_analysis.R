@@ -3,7 +3,7 @@
 # set working directory on local machine. Needs to be updated if 
 setwd("C:\\colin\\Coursera\\Course 3\\UCI HAR Dataset")
 
-library (dplyr)
+library (dplyr) 
 
 # Load subject identifiers for both test and training datasets
 testSubjects <- read.table("test\\subject_test.txt")

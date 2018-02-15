@@ -4,7 +4,7 @@ Based on the study "Human Activity Recognition Using Smartphones"
 ==================================================================
 Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto.
 Smartlab - Non Linear Complex Systems Laboratory
-DITEN - Università degli Studi di Genova.
+DITEN - UniversitÃ  degli Studi di Genova.
 Via Opera Pia 11A, I-16145, Genoa, Italy.
 activityrecognition@smartlab.ws
 www.smartlab.ws
@@ -39,11 +39,20 @@ The following files are available for the train and test data. Their description
 
 Notes: 
 ======
-for a detailed description of the processing of the files see CodeBook.md
+To run the R script run_analysis.R in your environment you need to update the working directory statement at the top of the script. 
+The working directory needs to contain the files / folders listed above. i.e you need to have a train and a test folder with the corresponding 
+data files.
+
+There are two outputs from the script:
+	TidyData.txt : A formatted dataset with subject, activity and a set of mean and std data from the completed dataset. Columns are all labeled
+	MeanData.txt : A formatted dataset of TidyData containg a a mean of each of the numeric columns grouped by activity and subject.  
+
+
+For a detailed description of the processing of the files see CodeBook.md
 
 
 
-please not license retrictions below based on README.txt in source project
+Please note license retrictions below based on README.txt in source project
 
 License:
 ========
